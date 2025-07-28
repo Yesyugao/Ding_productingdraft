@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://drjbailvdh5yt"]
+
+[ext_resource type="Script" uid="uid://cc27xihpqovb" path="res://scripts/CardData.gd" id="1_scissors_script"]
+[ext_resource type="Texture2D" uid="uid://dg2ooyqi004fj" path="res://剪刀.png" id="2_scissors_tex"]
+
+[resource]
+script = ExtResource("1_scissors_script")
+id = "SCISSORS_01"
+card_name = "剪刀"
+card_type = 2
+description = "打出【剪刀】进行对决。"
+cost = 0
+texture = ExtResource("2_scissors_tex")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://b1d0am21npwc4"]
+
+[ext_resource type="Script" uid="uid://cc27xihpqovb" path="res://scripts/CardData.gd" id="1_paper_script"]
+[ext_resource type="Texture2D" uid="uid://b4uj66v2d13hb" path="res://布.png" id="2_paper_tex"]
+
+[resource]
+script = ExtResource("1_paper_script")
+id = "PAPER_01"
+card_name = "布"
+card_type = 1
+description = "打出【布】进行对决。"
+cost = 0
+texture = ExtResource("2_paper_tex")

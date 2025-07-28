@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://cdfttpii37s77"]
+
+[ext_resource type="Script" uid="uid://cc27xihpqovb" path="res://scripts/CardData.gd" id="1_blank_script"]
+[ext_resource type="Texture2D" uid="uid://4hmien3w28q2" path="res://空白卡.png" id="2_blank_tex"]
+
+[resource]
+script = ExtResource("1_blank_script")
+id = "BLANK_01"
+card_name = "空白卡"
+card_type = 3
+description = "消耗1点费用，从牌库中抽取2张卡牌。"
+cost = 1
+texture = ExtResource("2_blank_tex")

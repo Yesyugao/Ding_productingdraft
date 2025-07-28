@@ -1,0 +1,348 @@
+[gd_scene load_steps=8 format=3 uid="uid://dy56bm15l5hub"]
+
+[ext_resource type="Script" uid="uid://c0aibnnadkkr" path="res://scripts/Main.gd" id="1_3j6qk"]
+[ext_resource type="PackedScene" path="res://scenes/Card.tscn" id="2_1vhqg"]
+[ext_resource type="Theme" uid="uid://c5lhabox7neo3" path="res://themes/main_theme.tres" id="3_theme"]
+[ext_resource type="Texture2D" uid="uid://bnp1h2gckovc1" path="res://assets/pixel_art_landscape.png" id="4_bg"]
+[ext_resource type="Texture2D" uid="uid://clrol65umldei" path="res://assets/pixel_ui_elements.png" id="5_ui"]
+[ext_resource type="Script" uid="uid://xxefcjd0011m" path="res://scripts/Monster.gd" id="6_monster"]
+[ext_resource type="PackedScene" uid="uid://bqwbsy54nqw6f" path="res://scenes/SpeechBubble.tscn" id="7_bubble"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_3j6qk")
+card_scene = ExtResource("2_1vhqg")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_bg")
+expand_mode = 1
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameTitle" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 80.0
+grow_horizontal = 2
+text = "剪刀石头布对战"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BattleZone" type="NinePatchRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -956.0
+offset_top = -596.0
+offset_right = 954.0
+offset_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_ui")
+region_rect = Rect2(16, 32, 16, 16)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="CardDisplay" type="Control" parent="UI/BattleZone"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -90.0
+offset_right = 140.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CardName" type="Label" parent="UI/BattleZone/CardDisplay"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -63.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 45
+text = "无卡牌"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DropZoneHighlight" type="ColorRect" parent="UI/BattleZone"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 4.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.3, 0.8, 0.3, 0.3)
+
+[node name="EnemyBattleCardZone" type="Panel" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -250.0
+offset_right = 150.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/EnemyBattleCardZone"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "敌人出牌"
+
+[node name="CardName" type="Label" parent="UI/EnemyBattleCardZone"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_right = 40.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "卡牌名称"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerHandContainer" type="HBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -800.0
+offset_top = -350.0
+offset_right = 800.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="LeftSidebar" type="NinePatchRect" parent="UI"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 340.0
+offset_bottom = 340.0
+texture = ExtResource("5_ui")
+region_rect = Rect2(48, 16, 16, 16)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="PlayerStatus" type="VBoxContainer" parent="UI/LeftSidebar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/LeftSidebar/PlayerStatus"]
+layout_mode = 2
+text = "玩家状态"
+horizontal_alignment = 1
+
+[node name="HP" type="Label" parent="UI/LeftSidebar/PlayerStatus"]
+layout_mode = 2
+text = "HP: 3 ❤"
+
+[node name="Energy" type="Label" parent="UI/LeftSidebar/PlayerStatus"]
+layout_mode = 2
+text = "能量: 3 ⚡"
+
+[node name="Separator1" type="HSeparator" parent="UI/LeftSidebar/PlayerStatus"]
+layout_mode = 2
+
+[node name="DeckInfo" type="Label" parent="UI/LeftSidebar/PlayerStatus"]
+layout_mode = 2
+text = "牌组信息"
+horizontal_alignment = 1
+
+[node name="DeckCount" type="Label" parent="UI/LeftSidebar/PlayerStatus"]
+layout_mode = 2
+text = "牌堆: 13"
+
+[node name="DiscardCount" type="Label" parent="UI/LeftSidebar/PlayerStatus"]
+layout_mode = 2
+text = "弃牌堆: 0"
+
+[node name="Separator2" type="HSeparator" parent="UI/LeftSidebar/PlayerStatus"]
+layout_mode = 2
+
+[node name="PileButtons" type="HBoxContainer" parent="UI/LeftSidebar/PlayerStatus"]
+layout_mode = 2
+alignment = 1
+
+[node name="DeckButton" type="Button" parent="UI/LeftSidebar/PlayerStatus/PileButtons"]
+layout_mode = 2
+tooltip_text = "查看牌堆"
+text = "牌堆"
+
+[node name="DiscardButton" type="Button" parent="UI/LeftSidebar/PlayerStatus/PileButtons"]
+layout_mode = 2
+tooltip_text = "查看弃牌堆"
+text = "弃牌"
+
+[node name="MyDeckButton" type="Button" parent="UI/LeftSidebar/PlayerStatus/PileButtons"]
+layout_mode = 2
+tooltip_text = "查看我的牌组"
+text = "牌组"
+
+[node name="RightSidebar" type="NinePatchRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -340.0
+offset_top = 40.0
+offset_right = -40.0
+offset_bottom = 340.0
+grow_horizontal = 0
+texture = ExtResource("5_ui")
+region_rect = Rect2(48, 16, 16, 16)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="EnemyStatus" type="VBoxContainer" parent="UI/RightSidebar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/RightSidebar/EnemyStatus"]
+layout_mode = 2
+text = "敌人状态"
+horizontal_alignment = 1
+
+[node name="HP" type="Label" parent="UI/RightSidebar/EnemyStatus"]
+layout_mode = 2
+text = "HP: 3 ❤"
+
+[node name="Separator1" type="HSeparator" parent="UI/RightSidebar/EnemyStatus"]
+layout_mode = 2
+
+[node name="GameInfo" type="Label" parent="UI/RightSidebar/EnemyStatus"]
+layout_mode = 2
+text = "游戏信息"
+horizontal_alignment = 1
+
+[node name="CurrentTurn" type="Label" parent="UI/RightSidebar/EnemyStatus"]
+layout_mode = 2
+text = "当前回合: 玩家"
+
+[node name="BattleResult" type="Label" parent="UI/RightSidebar/EnemyStatus"]
+layout_mode = 2
+text = "战斗结果: 无"
+
+[node name="Monster" type="Node2D" parent="UI"]
+position = Vector2(1530, 150)
+script = ExtResource("6_monster")
+
+[node name="SpeechBubble" parent="UI" instance=ExtResource("7_bubble")]
+visible = false
+layout_mode = 1
+offset_left = 1330.0
+offset_top = 80.0
+offset_right = 1530.0
+offset_bottom = 160.0
+
+[node name="DropHint" type="Label" parent="UI"]
+modulate = Color(1, 1, 1, 0.7)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 200.0
+offset_right = 200.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "将战斗卡牌拖拽到此处"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EndTurnButton" type="Button" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -202.0
+offset_top = -411.0
+offset_right = -52.0
+offset_bottom = -361.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "结束回合"

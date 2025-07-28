@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://byohhc1f7slui"]
+
+[ext_resource type="Script" uid="uid://cc27xihpqovb" path="res://scripts/CardData.gd" id="1_rock_script"]
+[ext_resource type="Texture2D" uid="uid://co5pnxifp276c" path="res://石头.png" id="2_rock_tex"]
+
+[resource]
+script = ExtResource("1_rock_script")
+id = "ROCK_01"
+card_name = "石头"
+card_type = 0
+description = "打出【石头】进行对决。"
+cost = 0
+texture = ExtResource("2_rock_tex")

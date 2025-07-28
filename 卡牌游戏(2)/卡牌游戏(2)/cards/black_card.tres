@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://c8yeyk8u4h6nh"]
+
+[ext_resource type="Script" uid="uid://cc27xihpqovb" path="res://scripts/CardData.gd" id="1_black_script"]
+[ext_resource type="Texture2D" uid="uid://4hmien3w28q2" path="res://空白卡.png" id="2_black_tex"]
+
+[resource]
+script = ExtResource("1_black_script")
+id = "BLACK_01"
+card_name = "黑卡"
+card_type = 4
+description = "消耗2点费用，本回合剪刀石头布的克制关系反转。"
+cost = 2
+texture = ExtResource("2_black_tex")
